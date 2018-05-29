@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head profile="http://gmpg.org/xfn/11">
+        <meta name="renderer" content="webkit">
+        <meta  charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="坐标转换程序设计">
+        <meta name="description" content="B/S端基于MVC架构的坐标转换程序设计">
+        <meta content="坐标住转换" about="程序设计" />
+        <meta about="张桓">
+		<title>坐标转换程序设计</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-select.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body data-spy="scroll" data-target="#myscrollspy">
+
+    <!--返回顶部-->
+    <div id="top"></div>
+    <div id="back-to-top"><a href="#top"><span></span></a></div>
+
+
+    <!-- 导航开始 -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand logo">
+                    <img src="img/logo.png" alt="坐标转换">
+                </a>
+                <button  class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right menu-drop">
+                    <li class=""><a href="index.html"><span class="glyphicon glyphicon-home"> 首页</span> </a></li>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" ><span class="glyphicon glyphicon-list "> </span>  转换类型</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">单点</a></li>
+                            <li class="disabled"><a href="#">批量</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" ><span class="glyphicon glyphicon-fire "> </span> 转换方式</a>
+                        <ul class="dropdown-menu">
+                            <li  class="disabled"><a href="#">北京54 <=> 西安80</a></li>
+                            <li  class="disabled"><a href="#">西安80 <=> CGCS2000</a></li>
+                            <li  class="disabled"><a href="#">北京54 <=> CGCS2000</a></li>
+                            <li  class="disabled"><a href="#">大地系 <=> 空直系</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-question-sign"> </span> 关于</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <!-- 导航结束 -->
+
+
+
+    <br/><br/><br>
+    <div class="visible-xs"><br><br></div>
+    <div class="visible-md"><br></div>
+
+    <!--主体部分开始-->
+    <div class="container">
+
+        <!--1.1高斯正算-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">1.1、高斯投影及高斯直角坐标系 正算</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入经度</span>
+                        <label class="sr-only" for="gauss_z_jd">输入经度</label>
+                        <input type="email" data-toggle="tooltip" title="eg：0010101 表示 1°1′1″"  data-placement="auto" class="form-control" id="gauss_z_jd" placeholder="Enter L">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入纬度</span>
+                        <label class="sr-only" for="gauss_z_wd">输入纬度</label>
+                        <input type="email" data-toggle="tooltip" title="eg：0010101 表示 1°1′1″" data-placement="auto" class="form-control" id="gauss_z_wd" placeholder="Enter B">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">选择分带</span>
+                        <select id="select11" class="selectpicker show-tick  show-menu-arrow" data-width="auto">
+                            <option value="3">3°带</option>
+                            <option value="6">6°带</option>
+                        </select>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">选择椭球</span>
+                        <select id="select12" class="selectpicker show-tick  show-menu-arrow" data-width="auto" >
+                            <option value="keshi_z">克拉索夫斯基椭球</option>
+                            <option value="IUGG_z">IUGG1975国际椭球</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="panel-footer">
+                    <button id="gauss_z_result_btn" data-toggle="tooltip" title="点击开始计算" data-placement="auto" class="btn btn-success">计算</button>
+                    <label id="gauss_z_result"> 计算结果：</label>
+                </div>
+            </div>
+        </div>
+        <!--高斯正算结束-->
+
+
+
+        <!--1.2高斯反算-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">1.2、高斯投影及高斯直角坐标系 反算</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入X坐标</span>
+                        <label class="sr-only" for="gauss_x">输入X坐标</label>
+                        <input type="email" data-toggle="tooltip" title="输入X坐标，单位为m"  data-placement="auto" class="form-control" id="gauss_x" placeholder="Enter X">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入Y坐标</span>
+                        <label class="sr-only" for="gauss_y">输入Y坐标</label>
+                        <input type="email" data-toggle="tooltip" title="输入Y坐标，单位为m" data-placement="auto"  class="form-control" id="gauss_y" placeholder="Enter Y">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group col-lg-2">
+                        <span class="input-group-addon">输入带号</span>
+                        <label class="sr-only" for="gauss_dh">输入带号</label>
+                        <input type="email" data-toggle="tooltip" title="输入带号"  data-placement="auto" class="form-control" id="gauss_dh" placeholder="Enter N">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">选择椭球</span>
+                        <select id="select2" class="selectpicker show-tick  show-menu-arrow" data-width="auto" >
+                            <option value="keshi">克拉索夫斯基椭球</option>
+                            <option value="IUGG">IUGG1975国际椭球</option>
+                        </select>
+                    </div>
+                </form>
+
+
+                <div class="panel-footer">
+                    <button id="gauss_f_result_btn"  data-toggle="tooltip" title="点击开始计算"  data-placement="auto" class="btn btn-success">计算</button>
+                    <label id="gauss_f_result"> 计算结果：</label>
+                </div>
+            </div>
+        </div>
+        <!--高斯反算结束-->
+
+
+        <!--2.1参心大地坐标 与 参心空间直角坐标 正算-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">2.1大地坐标 与 空间直角坐标 （正算）</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入经度</span>
+                        <label class="sr-only" for="_L">输入经度</label>
+                        <input type="email" data-toggle="tooltip" title="eg：0010101 表示 1°1′1″" class="form-control" id="_L" placeholder="Enter L">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入纬度</span>
+                        <label class="sr-only" for="_B">输入纬度</label>
+                        <input type="email" data-toggle="tooltip" title="eg：0010101 表示 1°1′1″" class="form-control" id="_B" placeholder="Enter B">
+                    </div>
+                    <div class="form-group input-group col-lg-2">
+                        <span class="input-group-addon">大地高H</span>
+                        <label class="sr-only" for="_H">大地高H</label>
+                        <input type="email" data-toggle="tooltip" title="输入大地高单位m" class="form-control" id="_H" placeholder="Enter H">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">选择椭球</span>
+                        <select id="select3" class="selectpicker show-tick  show-menu-arrow" data-width="auto" >
+                            <option>克拉索夫斯基椭球</option>
+                            <option>IUGG1975国际椭球</option>
+                            <option>WGS84椭球</option>
+                            <option>CGCS2000椭球</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="panel-footer">
+                    <button id="btn_dd2kz" class="btn btn-success">计算</button>
+                    <label id="DaDi2KZ"> 计算结果：</label>
+                </div>
+            </div>
+        </div>
+        <!--正算结束-->
+
+
+
+        <!--2.2参心大地坐标 与 参心空间直角坐标 反算-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">2.2空间直角坐标 与 大地坐标  （反算）</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入X坐标</span>
+                        <label class="sr-only" for="XX">输入X坐标</label>
+                        <input type="email" data-toggle="tooltip" title="输入x坐标单位m" class="form-control" id="XX" placeholder="Enter X">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入Y坐标</span>
+                        <label class="sr-only" for="YY">输入Y坐标</label>
+                        <input type="email" data-toggle="tooltip" title="输入Y坐标单位m" class="form-control" id="YY" placeholder="Enter Y">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入Z坐标</span>
+                        <label class="sr-only" for="ZZ">输入Z坐标</label>
+                        <input type="email" data-toggle="tooltip" title="输入Z坐标单位m" class="form-control" id="ZZ" placeholder="Enter Z">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">选择椭球</span>
+                        <select id="select4" class="selectpicker show-tick  show-menu-arrow" data-width="auto" >
+                            <option>克拉索夫斯基椭球</option>
+                            <option>IUGG1975国际椭球</option>
+                            <option>WGS84椭球</option>
+                            <option>CGCS2000椭球</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="panel-footer">
+                    <button id="xyz2blh_btn" class="btn btn-success">计算</button>
+                    <label id="xyz2blh"> 计算结果：</label>
+                </div>
+            </div>
+        </div>
+        <!--2.2参心大地坐标 与 参心空间直角坐标 反算结束-->
+
+
+
+
+
+
+
+
+        <!--4.1、 不同空间直角坐标系转换开始-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">4、不同空间直角坐标系之间的转换</h3>
+            </div>
+
+            <!--处理七参数开始-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">录入七参数</h3>
+                </div>
+
+                <form class="form-inline">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">平移参数∆X<sub>0</sub></span>
+                        <label class="sr-only" for="x0">平移参数∆X<sub>0</sub></label>
+                        <input type="email" class="form-control" id="x0" placeholder="Enter ∆X0">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">平移参数∆Y<sub>0</sub></span>
+                        <label class="sr-only" for="y0">平移参数∆Y<sub>0</sub></label>
+                        <input type="email" class="form-control" id="y0" placeholder="Enter ∆Y0">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">平移参数∆Z<sub>0</sub></span>
+                        <label class="sr-only" for="z0">平移参数∆Z<sub>0</sub></label>
+                        <input type="email" class="form-control" id="z0" placeholder="Enter ∆Z0">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">欧拉角 ε<sub>X</sub></span>
+                        <label class="sr-only" for="ex">欧拉角 ε<sub>X</sub></label>
+                        <input type="email" class="form-control" id="ex" placeholder="Enter εX">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">欧拉角 ε<sub>Y</sub></span>
+                        <label class="sr-only" for="gauss_z_wd">欧拉角 ε<sub>Y</sub></label>
+                        <input type="email" class="form-control" id="ey" placeholder="Enter εY">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">欧拉角 ε<sub>Z</sub></span>
+                        <label class="sr-only" for="gauss_z_wd">欧拉角 ε<sub>Z</sub></label>
+                        <input type="email" class="form-control" id="ez" placeholder="Enter εZ">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">缩放因子 m</span>
+                        <label class="sr-only" for="m">缩放因子 m</label>
+                        <input type="email" class="form-control" id="m" placeholder="Enter m">
+                    </div>
+
+                </form>
+
+                <div class="panel-footer">
+                    七参数首先应该根据已知坐标数据在Excel或者MATLAB中通过平差计算出来可以
+                    <span class="label-warning">手动输入</span>
+                    也可以 先
+                    <select id="select5" class="selectpicker show-tick  show-menu-arrow" data-width="auto">
+                        <option class="opt" value="0">选择转换类型</option>
+                        <option class="opt" value="1">54系转80系</option>
+                        <option class="opt" value="2">54系转84系</option>
+                        <option class="opt" value="3">54系转2000</option>
+                        <option class="opt" value="4">80系转54系</option>
+                        <option class="opt" value="5">80系转84系</option>
+                        <option class="opt" value="6">80系转2000系</option>
+                        <option class="opt" value="7">84系转54系</option>
+                        <option class="opt" value="8">84系转80系</option>
+                        <option class="opt" value="9">84系转2000系</option>
+                        <option class="opt" value="10">2000系转54系</option>
+                        <option class="opt" value="11">2000系转80系</option>
+                        <option class="opt" value="12">2000系转84系</option>
+                    </select>
+                    再从数据库
+                    <button id="getData" class="btn btn-warning">读取</button>
+                    七参数
+                </div>
+            </div>
+            <!--录入七参数结束-->
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入X坐标</span>
+                        <label class="sr-only" for="x">输入X坐标</label>
+                        <input type="email" class="form-control" id="x" placeholder="Enter X">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入Y坐标</span>
+                        <label class="sr-only" for="y">输入Y坐标</label>
+                        <input type="email" class="form-control" id="y" placeholder="Enter Y">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">输入Z坐标</span>
+                        <label class="sr-only" for="z">输入Z坐标</label>
+                        <input type="email" class="form-control" id="z" placeholder="Enter Z">
+                        <span class="input-group-addon">m</span>
+                    </div>
+
+                </form>
+                <div class="panel-footer">
+                    <button id="result1-btn" class="btn btn-success">计算</button>
+                    <label id="result1"> 计算结果：</label>
+                </div>
+            </div>
+        </div>
+        <!--4.1、 不同空间直角坐标系转化结束-->
+
+
+
+
+
+    </div>
+    <!--主体部分结束-->
+
+<!-- 页脚开始 -->
+<footer id="footer">
+	<div class="container">
+		<p>个人说明 | 合作事宜 | 版权设计</p>
+		<p>豫 ICP 备 123456789. &copy; 2016-now(); john_3 个人网 powerd BY （John_3）张桓</p>
+	</div>
+</footer>
+<!-- 页脚结束 -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/index.js"></script>
+
+
+    </body>
+</html>

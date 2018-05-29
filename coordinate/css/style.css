@@ -1,0 +1,142 @@
+@charset "utf-8";
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+    color: #666;
+}
+.logo {
+    padding: 0;
+}
+#mycarousel{
+	margin: 50px 0 0 0;
+}
+.menu-drop {
+	margin-top:0px;
+}
+.carousel-inner img{
+	margin: 0 auto;
+}
+
+#footer{
+	background-color: #666;
+	color: #eee;
+	border-top: 1px solid #ccc;
+	padding: 20px;
+	text-align: center;
+}
+
+
+/*媒体查询开始*/
+/*1大屏幕（大桌面显示器，大于等于1200px）*/
+@media (min-width: 1200px){
+    body{
+        font-size: 15px;
+    }
+    span,h3.panel-title,button.btn,select option.opt{
+        font-size: 15px;
+    }
+
+}
+/*2平板竖屏到横屏到常规屏幕*/
+@media (max-width: 1200px) {
+    body{
+        font-size: 13px;
+    }
+    span,div h3,h3.panel-title,button.btn,select option.opt{
+        font-size: 13px;
+    }
+}
+/*3手机横屏到平板竖屏*/
+@media (max-width: 768px) {
+	body{
+		font-size: 11px;
+	}
+    span,div h3,h3.panel-title,button.btn,select option.opt{
+        font-size: 11px;
+    }
+}
+/*4手机竖屏及更小屏幕*/
+@media (max-width: 480px) {
+	body{
+		font-size: 9px;
+	}
+    span,div h3,h3.panel-title,button.btn,select option.opt{
+        font-size: 9px;
+    }
+
+}
+/*媒体查询结束*/
+
+
+/*表单开始*/
+h3{
+    text-align: center;
+}
+.form1 fieldset{
+    width: 49%;
+    padding: 0 20px 20px 20px;
+    border: 2px solid #96f;
+    border-radius: 10px;
+}
+.form1 fieldset legend{
+    text-align: center;
+}
+.form1 .left{
+    float: left;
+}
+.form1 .right{
+    float: right;
+}
+.form1 legend{
+    letter-spacing: 1px;
+}
+.form1 legend mark{
+    font-weight: bold;
+}
+.form1 label{
+    display: block;
+    margin: 5px;
+}
+/*表单结束*/
+
+/*returnTop开始*/
+div#back-to-top{
+	z-index: 99999;
+    position:fixed;
+    display:none;
+    bottom:80px;
+    right:30px;
+}
+div#back-to-top a{
+    text-align:center;
+    text-decoration:none;
+    display:block;
+    width:38px;
+    /*使用CSS3中的transition属性给跳转链接中的文字添加渐变效果*/
+    -moz-transition:color 1s;
+    -webkit-transition:color 1s;
+    -o-transition:color 1s;
+}
+div#back-to-top a:hover{
+    color:#979797;
+}
+div#back-to-top a span{
+    background: transparent url(../img/top.png) no-repeat ;
+    background-size: contain;
+    border-radius:6px;
+    display:block;
+    height:38px;
+    width:38px;
+    margin-bottom:5px;
+    /*使用CSS3中的transition属性给<span>标签背景颜色添加渐变效果*/
+    -moz-transition:background 1s;
+    -webkit-transition:background 1s;
+    -o-transition:background 1s;
+}
+div#back-to-top a:hover span{
+    background: transparent url(../img/top.png) no-repeat ;
+    background-size: contain;
+}
+/*returnTop结束*/
+
+
+
